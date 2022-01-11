@@ -2,6 +2,10 @@
 
 ## Creado por Luca Cittá Giordano :D
 
+Link a video explicativo:
+https://drive.google.com/file/d/1yz5AI5iK9AwBcHaVwEnBKz17ZLkII_Td/view?usp=sharing
+
+
 ### instalacion
 
 * Clonar el repositorio con: git clone https://github.com/lucacitta/backend-challenge.git
@@ -28,12 +32,12 @@
 ### Funcionamiento
 
 La api conta con 5 endpoints (Todos deben ser accedidos mediante metodo POST):
-    */populate-apis: Llama a la task de celery encargada de popular la base de datos, es necesario realizarlo primero.
+* /populate-apis: Llama a la task de celery encargada de popular la base de datos, es necesario realizarlo primero.
 
-    */keyword: Recibe en el body una keyword y devuelve las apis cuyo nombre comiencen con la misma, debe enviarse la informacion de la siguiente manera: {"keyword":"palabra_clave"}
+* /keyword: Recibe en el body una keyword y devuelve las apis cuyo nombre comiencen con la misma, debe enviarse la informacion de la siguiente manera: {"keyword":"palabra_clave"}
 
-    */category: Funciona similar a /keyword, pero esta recibe una categoria y devuelve las apis que pertenezcan a la misma, la informacion debe enviarse siguiendo la misma logica {"category":"categoria"}
+* /category: Funciona similar a /keyword, pero esta recibe una categoria y devuelve las apis que pertenezcan a la misma, la informacion debe enviarse siguiendo la misma logica {"category":"categoria"}
 
-    */ordered-list: No recibe ningun parametro y devuelve la informacion de todas las apis ordenadas segun el pk (id).
+* /ordered-list: No recibe ningun parametro y devuelve la informacion de todas las apis ordenadas segun el pk (id).
 
-    */item: El endpoint recibe un pk especifico y devuelve toda la informacion sobre la api que tenga ese id. Debe recibir la informacion siguiendo la misma logica que los endpoints anteriores {"pk":"id"}
+* /item: El endpoint recibe un pk especifico y devuelve toda la informacion sobre la api que tenga ese id. Debe recibir la informacion siguiendo la misma logica que los endpoints anteriores {"pk":"id"}

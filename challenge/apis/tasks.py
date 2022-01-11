@@ -16,7 +16,7 @@ def populate():
 
 def get_data():
     url = 'https://api.publicapis.org/entries'
-    response = requests.get(url)    #El requerimiento decia utilizar post, pero no es metodo permitido por la api
+    response = requests.get(url)    #El requerimiento decia utilizar post, pero no es metodo permitido por la api.
     data = json.loads(response.content)
     data = boolean_fix(data['entries'])
     return data

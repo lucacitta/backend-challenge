@@ -1,3 +1,4 @@
+from django.utils.functional import empty
 import requests
 import json
 
@@ -6,6 +7,8 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from .serializers import ApiModelSerializer
+
+from apis.models import Apis
 
 
 @api_view(['POST', 'GET'])
@@ -38,3 +41,16 @@ def boolean_fix(data):
     return data
 
 
+@api_view(['POST', 'GET'])
+def findKeyword(request):
+    if request.method=='POST':
+        keyword = request.data['keyword']
+        data = Apis.objects.filter(API__startswith=keyword)
+        print(data)
+        if data.exists():
+            serializer = ApiModelSerializer(data, many = True)
+            return Response({'message':serializer.data})
+        else:
+            return Response({'message':'Ninguna api coincide con el criterio seleccionado'}, status=status.HTTP_404_NOT_FOUND)
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)

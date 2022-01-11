@@ -4,6 +4,6 @@ from .api.views import populateApis, findKeyword
 
 
 urlpatterns = [
-    path('populate-apis', populateApis, name='populate-apis'),
-    path('keyword', findKeyword, name='keyword')
+    path('populate-apis/', populateApis, name='populate-apis'),
+    path('keyword/', findKeyword, name='keyword')
 ]

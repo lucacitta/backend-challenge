@@ -46,16 +46,16 @@ def boolean_fix(data):
 
 @api_view(['POST', 'GET'])
 def findKeyword(request):
-    if request.method=='POST':
-        data = Apis.objects.filter(API__startswith=request.data['keyword'])
-        if data.exists():
-            serializer = ApiModelSerializer(data, many = True)
-            return Response({'message':serializer.data}, status=status.HTTP_200_OK)
-        else:
-            return Response({'message':'Ninguna api coincide con el criterio seleccionado'},
-                            status=status.HTTP_404_NOT_FOUND)
-    else:
-        raise Http404
+    if 'keyword' in request.data:
+        if request.method=='POST':
+            data = Apis.objects.filter(API__startswith=request.data['keyword'])
+            if data.exists():
+                serializer = ApiModelSerializer(data, many = True)
+                return Response({'message':serializer.data}, status=status.HTTP_200_OK)
+            else:
+                return Response({'message':'Ninguna api coincide con el criterio seleccionado'},
+                                status=status.HTTP_404_NOT_FOUND)
+    raise Http404
 
 
 
@@ -66,13 +66,15 @@ class CategoryApiView(APIView):
         raise Http404
 
     def post(self, request):
-        category = Apis.objects.filter(Category = request.data['category'])
-        if category.exists():
-            serializer = ApiModelSerializer(category, many = True)
-        else:
-            return Response({'message':'Ninguna categoria coincide con el criterio seleccionado'},
-                            status=status.HTTP_404_NOT_FOUND)
-        return Response(serializer.data)
+        if 'category' in request.data:
+            category = Apis.objects.filter(Category = request.data['category'])
+            if category.exists():
+                serializer = ApiModelSerializer(category, many = True)
+            else:
+                return Response({'message':'Ninguna categoria coincide con el criterio seleccionado'},
+                                status=status.HTTP_404_NOT_FOUND)
+            return Response(serializer.data)
+        raise Http404
 
 
 
@@ -85,3 +87,19 @@ def orderedList(request):
         return Response(serializer.data)
     else:
         raise Http404
+
+
+
+
+@api_view(['POST','GET'])
+def itemDetail(request):
+    if 'pk' in request.data:    #Nos aseguramos de que haya algun pk
+        if request.method=='POST':
+            item = Apis.objects.filter(id = request.data['pk'])
+            if item.exists():
+                serializer = ApiModelSerializer(item, many = True)
+            else:
+                return Response({'message':'Ningun item coincide con el criterio seleccionado'},
+                                status=status.HTTP_404_NOT_FOUND)
+            return Response(serializer.data)
+    raise Http404

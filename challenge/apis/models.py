@@ -12,5 +12,5 @@ class Apis(models.Model):
     verbose_name = 'Api'
     verbose_name_plural = 'Apis'
 
-    # def __str__(self):
-    #     return self.API
+    def __str__(self):
+        return self.API
